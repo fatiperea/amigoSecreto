@@ -14,11 +14,14 @@ let i = 0;
 function agregarAmigo() {
   nombre = document.getElementById("amigo").value;
   console.log(nombre);
-  if (nombre === "" || !isNaN(nombre)) alert("No se ha ingresado un nombre!");
+  if (nombre === "" || !isNaN(nombre)) alert("Por favor inserte un nombre");
   else {
     //while (i <= max) {
-      amigos.push(nombre);
-      console.log(amigos);
+    amigos.push(nombre);
+
+    document.getElementById("amigo").value = "";
+
+    console.log(amigos);
     //}
   }
 }
