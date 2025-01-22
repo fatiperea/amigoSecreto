@@ -8,3 +8,10 @@ let amigos=[];
 let nombre;
 
 
+
+//console.log(nombre);
+
+function agregarAmigo(){
+    nombre = document.getElementById('amigo').value;
+    console.log(nombre);
+}
