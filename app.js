@@ -7,10 +7,18 @@ let amigos = [];
 
 let nombre;
 
+let i = 0;
+
 //console.log(nombre);
 
 function agregarAmigo() {
   nombre = document.getElementById("amigo").value;
   console.log(nombre);
   if (nombre === "" || !isNaN(nombre)) alert("No se ha ingresado un nombre!");
+  else {
+    //while (i <= max) {
+      amigos.push(nombre);
+      console.log(amigos);
+    //}
+  }
 }
