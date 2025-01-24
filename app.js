@@ -1,7 +1,7 @@
 // El principal objetivo de este desafío es fortalecer tus habilidades en lógica de programación.
 // Aquí deberás desarrollar la lógica para resolver el problema.
 
-const max = 10;
+const max = 5;
 
 let amigos = [];
 
@@ -11,17 +11,36 @@ let i = 0;
 
 //console.log(nombre);
 
+
 function agregarAmigo() {
   nombre = document.getElementById("amigo").value;
-  console.log(nombre);
+
   if (nombre === "" || !isNaN(nombre)) alert("Por favor inserte un nombre");
   else {
-    //while (i <= max) {
-    amigos.push(nombre);
-
+    
+    if (amigos.length < max) {
+      amigos.push(nombre);
+    } else {
+      alert("Ya se ha completado la lista de amigos");
+      document.getElementById("btnAgregar").setAttribute("disabled", "true");
+    }
     document.getElementById("amigo").value = "";
 
     console.log(amigos);
-    //}
+    
   }
 }
+
+
+/*} else {
+  document.getElementById("btnAgregar").disabled=true;
+  alert("Ya se ha completado la lista de amigos");
+} */
+
+//document.getElementById("btnAgregar").setAttribute("disables", "true");
+//alert("Ya se ha completado la lista de amigos");
+
+/*if (amigos.length > 0 && amigos.length <= 5) {
+  alert("Ya se ha completado la lista de amigos");
+  document.getElementById("btnAgregar").setAttribute("disabled", "true");
+}*/
