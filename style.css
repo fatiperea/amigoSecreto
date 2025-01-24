@@ -88,8 +88,9 @@ body {
 }
 
 .button-container {
-    width: 300px;
-    justify-content: center;
+    width: 500px;
+    display: flex;
+    justify-content:space-between;
 }
 
 /* Estilos de entrada de texto */
@@ -106,13 +107,20 @@ body {
 
 /* Estilos de botón */
 button {
-    padding: 15px 30px;
+    /*padding: 15px 30px;*/
     font-family: "Inter", sans-serif;
     font-size: 16px;
     border: 2px solid #000;
     border-radius: 25px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     cursor: pointer;
+
+    margin: 20 px;
+}
+
+#btnReiniciar{
+    
+    text-align: center;
 }
 
 .button-add {
@@ -146,8 +154,9 @@ ul {
 .button-draw {
     display: flex;
     align-items: center;
-    width: 100%;
+    width: 200px;
     padding: 10px 40px;
+    
     color: var(--color-white);
     background-color: var(--color-button);
     font-size: 16px;

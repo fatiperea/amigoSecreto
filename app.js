@@ -1,13 +1,21 @@
 // El principal objetivo de este desafío es fortalecer tus habilidades en lógica de programación.
 // Aquí deberás desarrollar la lógica para resolver el problema.
 
-const totalAmigos = 5;
+let totalAmigos;
 
 let amigos = [];
 
 let nombre;
 
 let i = 0;
+
+function cantidadAmigos(){
+
+  totalAmigos=parseInt(prompt('Agregue cantidad de amigos: '));
+
+}
+
+cantidadAmigos();
 
 function agregarAmigo() {
   nombre = document.getElementById("amigo").value.toUpperCase();
@@ -50,4 +58,14 @@ function sortearAmigo() {
     document.getElementById("btnSortear").setAttribute("disabled", "true");
     alert("La lista está vacía!");
   }
+}
+
+function reiniciar(){
+
+  document.getElementById("listaAmigos").innerHTML='';
+  document.getElementById("resultado").innerHTML='';
+  document.getElementById("btnSortear").setAttribute("disabled", "true");
+
+  cantidadAmigos();
+
 }
