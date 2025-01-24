@@ -9,7 +9,6 @@ let nombre;
 
 let i = 0;
 
-
 function agregarAmigo() {
   nombre = document.getElementById("amigo").value;
 
@@ -17,8 +16,6 @@ function agregarAmigo() {
   else {
     if (amigos.length < max) {
       amigos.push(nombre);
-     
-
     } else {
       alert("Ya se ha completado la lista de amigos");
       document.getElementById("btnAgregar").setAttribute("disabled", "true");
@@ -30,31 +27,17 @@ function agregarAmigo() {
   }
 }
 
+function mostrarAmigos() {
+  let lista = document.getElementById("listaAmigos");
+  lista.innerHTML = "";
 
+  for (i = 0; i < amigos.length; i++) {
 
-function mostrarAmigos(){
-
-  for(i=0;i<amigos.length;i++)
-  {
-    document.getElementById('listaAmigos').innerHTML= `<li>${amigos[i]}</li><br>`;
-
+    lista.innerHTML+= `<li><b>${amigos[i]}</li><br>`;
   }
-
 }
 
 function sortearAmigo() {
   if (amigos.length > 0) return Math.floor(Math.random() * amigos.length) + 1;
 }
 
-/*} else {
-  document.getElementById("btnAgregar").disabled=true;
-  alert("Ya se ha completado la lista de amigos");
-} */
-
-//document.getElementById("btnAgregar").setAttribute("disables", "true");
-//alert("Ya se ha completado la lista de amigos");
-
-/*if (amigos.length > 0 && amigos.length <= 5) {
-  alert("Ya se ha completado la lista de amigos");
-  document.getElementById("btnAgregar").setAttribute("disabled", "true");
-}*/
