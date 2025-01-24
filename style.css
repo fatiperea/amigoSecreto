@@ -119,7 +119,8 @@ button {
 }
 
 #btnReiniciar{
-    
+    display: flex;
+    justify-content: center;
     text-align: center;
 }
 
@@ -154,7 +155,7 @@ ul {
 .button-draw {
     display: flex;
     align-items: center;
-    width: 200px;
+    width: 220px;
     padding: 10px 40px;
     
     color: var(--color-white);
@@ -162,7 +163,7 @@ ul {
     font-size: 16px;
 }
 
-.button-draw img {
+#btnSortear img {
     margin-right: 40px;
 }
 
