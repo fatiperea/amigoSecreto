@@ -17,6 +17,8 @@ function agregarAmigo() {
   else {
     if (amigos.length < max) {
       amigos.push(nombre);
+     
+
     } else {
       alert("Ya se ha completado la lista de amigos");
       document.getElementById("btnAgregar").setAttribute("disabled", "true");
@@ -24,12 +26,20 @@ function agregarAmigo() {
     document.getElementById("amigo").value = "";
 
     console.log(amigos);
+    mostrarAmigos();
   }
 }
 
+
+
 function mostrarAmigos(){
 
-  
+  for(i=0;i<amigos.length;i++)
+  {
+    document.getElementById('listaAmigos').innerHTML= `<li>${amigos[i]}</li><br>`;
+
+  }
+
 }
 
 function sortearAmigo() {
