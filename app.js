@@ -9,15 +9,12 @@ let nombre;
 
 let i = 0;
 
-//console.log(nombre);
-
 
 function agregarAmigo() {
   nombre = document.getElementById("amigo").value;
 
   if (nombre === "" || !isNaN(nombre)) alert("Por favor inserte un nombre");
   else {
-    
     if (amigos.length < max) {
       amigos.push(nombre);
     } else {
@@ -27,10 +24,17 @@ function agregarAmigo() {
     document.getElementById("amigo").value = "";
 
     console.log(amigos);
-    
   }
 }
 
+function mostrarAmigos(){
+
+  
+}
+
+function sortearAmigo() {
+  if (amigos.length > 0) return Math.floor(Math.random() * amigos.length) + 1;
+}
 
 /*} else {
   document.getElementById("btnAgregar").disabled=true;
