@@ -24,7 +24,6 @@ function agregarAmigo() {
     }
     document.getElementById("amigo").value = "";
 
-    console.log(amigos);
     mostrarAmigos();
   }
 }
@@ -38,28 +37,17 @@ function mostrarAmigos() {
   }
 }
 
-/*function mostrarSorteado(indice)
-{
-  let sorteado=document.getElementById('resultado');
-
-  sorteado.innerHTML = `<li><b>${amigos[indice]}</li><br>`;
-
-  sorteado.setAttribute('title','Sorteado: ')
-
-}*/
-
 function sortearAmigo() {
-  
   if (amigos.length > 0) {
-    let indice = Math.floor(Math.random() * totalAmigos) + 1;
+    document.getElementById("btnSortear").removeAttribute("disabled");
 
-    console.log(indice)
+    let indice = Math.floor(Math.random() * amigos.length);
 
     let sorteado = document.getElementById("resultado");
 
-    sorteado.innerHTML = `<li><b>${amigos[indice]}</li><br>`;
-
-    //sorteado.setAttribute("title", "Sorteado: ");
-
-  }else alert('La lista está vacía!');
+    sorteado.innerHTML = `<li><b>Amigo secreto: ${amigos[indice]}</li><br>`;
+  } else {
+    document.getElementById("btnSortear").setAttribute("disabled", "true");
+    alert("La lista está vacía!");
+  }
 }
