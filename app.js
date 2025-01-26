@@ -10,7 +10,7 @@ let i = 0;
 //Se establece esta funcion para evitar una lista indefinida,
 // entendiendo que para un sorteo debe haber como minimo 2 amigos
 function cantidadAmigos() {
-  let numero = parseInt(prompt("Agregue cantidad de amigos (2 o mas): "));
+  let numero = parseInt(prompt("Agregue cantidad de amigos (2 o más): "));
   if (numero >= minimo) {
     totalAmigos = numero;
     document.getElementById("btnAgregar").removeAttribute("disabled");
@@ -19,6 +19,9 @@ function cantidadAmigos() {
     document.getElementById("btnAgregar").setAttribute("disabled", "true");
     cantidadAmigos();
   }
+
+  let subtitulo = document.getElementById("subtitulo");
+  subtitulo.innerHTML = `<h2>Digite el nombre de sus amigos (total de amigos: ${totalAmigos})  </h2>`;
 }
 
 cantidadAmigos();
@@ -26,13 +29,11 @@ cantidadAmigos();
 function nombreValido(nombre) {
   let esValido;
   if (nombre === "" || !isNaN(nombre) || nombre.length < 3) {
-    console.log("nombre no valido");
     alert("Por favor inserte un nombre válido");
-    //document.getElementById("btnAgregar").setAttribute("disabled", "true");
+
     document.getElementById("amigo").value = "";
     esValido = false;
   } else {
-    console.log("nombre valido");
     esValido = true;
   }
   return esValido;
@@ -44,13 +45,12 @@ function agregarAmigo() {
     document.getElementById("amigo").value.slice(1);
 
   if (nombreValido(`${nombre}`)) {
-    console.log("nombre valido", nombre);
-    //nombre=document.getElementById("amigo").value;
-    console.log(amigos.length);
     if (amigos.length < totalAmigos) {
-      amigos.push(nombre);
-      console.log(amigos);
-      console.log(totalAmigos);
+      if (amigos.includes(nombre)) {
+        alert("No se pueden repetir amigos");
+        document.getElementById("amigo").value = "";
+      } else amigos.push(nombre);
+
       mostrarAmigos();
 
       document.getElementById("btnAgregar").removeAttribute("disabled");
@@ -72,22 +72,20 @@ function agregarAmigo() {
 function mostrarAmigos() {
   let lista = document.getElementById("listaAmigos");
   lista.innerHTML = "";
-
+  lista.innerHTML += "<li>";
   for (i = 0; i < amigos.length; i++) {
-    lista.innerHTML += `<li><b>${amigos[i]}</li><br>`;
+    lista.innerText += ` ${amigos[i]} -`;
   }
+  lista.innerHTML += "</li>";
 }
 
 function sortearAmigo() {
-  console.log("a sortear");
-
   document.getElementById("btnAgregar").setAttribute("disabled", "true");
   let indice = Math.floor(Math.random() * amigos.length);
 
   let sorteado = document.getElementById("resultado");
 
   sorteado.innerHTML = `<li><b>Amigo secreto: ${amigos[indice]}</li><br>`;
-  //sorteoListo = true;
 
   document.getElementById("btnSortear").setAttribute("disabled", "true");
   document.getElementById("btnReiniciar").dataset.sorteoRealizado = "true";
@@ -97,14 +95,14 @@ function sortearAmigo() {
 //Se agrega funcion para reiniciar el juego
 function reiniciar() {
   let reiniciar = document.getElementById("btnReiniciar");
-  console.log("reinicia");
+
   if (reiniciar.dataset.sorteoRealizado) {
     document.getElementById("listaAmigos").innerHTML = "";
     document.getElementById("resultado").innerHTML = "";
-
+    document.getElementById("amigo").value = "";
     cantidadAmigos();
 
     amigos.length = 0;
     reiniciar.setAttribute("disabled", "true");
-  }
+  } else alert("No finalizó el sorteo");
 }

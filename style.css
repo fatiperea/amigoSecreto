@@ -63,7 +63,7 @@ body {
 
 .section-title {
     font-family: "Inter", serif;
-    font-size: 36px;
+    font-size: 25px;
     font-weight: 700;
     color: var(--color-primary);
     margin: 10px 0;
@@ -140,6 +140,7 @@ ul {
     color: var(--color-text);
     font-family: "Inter", sans-serif;
     font-size: 18px;
+    font-weight: bold;
     margin: 20px 0;
 }
 
