@@ -2,22 +2,16 @@
 // Aquí deberás desarrollar la lógica para resolver el problema.
 
 let totalAmigos;
-
+let minimo = 2;
 let amigos = [];
-
 let nombre;
-
 let i = 0;
 
-let sorteoListo = false;
-
-//document.getElementById("btnReiniciar").setAttribute("disabled", "true");
-
 //Se establece esta funcion para evitar una lista indefinida,
-// entendiendo que para el sorteo debe haber como minimo 2 amigos
+// entendiendo que para un sorteo debe haber como minimo 2 amigos
 function cantidadAmigos() {
-  let numero = parseInt(prompt("Agregue cantidad de amigos (mayor a uno): "));
-  if (numero > 1) {
+  let numero = parseInt(prompt("Agregue cantidad de amigos (2 o mas): "));
+  if (numero >= minimo) {
     totalAmigos = numero;
     document.getElementById("btnAgregar").removeAttribute("disabled");
   } else {
@@ -29,28 +23,52 @@ function cantidadAmigos() {
 
 cantidadAmigos();
 
-function agregarAmigo() {
-  nombre = document.getElementById("amigo").value.toUpperCase();
-
-  if (nombre === "" || !isNaN(nombre)) {
-    alert("Por favor inserte un nombre");
+function nombreValido(nombre) {
+  let esValido;
+  if (nombre === "" || !isNaN(nombre) || nombre.length < 3) {
+    console.log("nombre no valido");
+    alert("Por favor inserte un nombre válido");
+    //document.getElementById("btnAgregar").setAttribute("disabled", "true");
     document.getElementById("amigo").value = "";
+    esValido = false;
   } else {
+    console.log("nombre valido");
+    esValido = true;
+  }
+  return esValido;
+}
+
+function agregarAmigo() {
+  nombre =
+    document.getElementById("amigo").value.charAt(0).toUpperCase() +
+    document.getElementById("amigo").value.slice(1);
+
+  if (nombreValido(`${nombre}`)) {
+    console.log("nombre valido", nombre);
+    //nombre=document.getElementById("amigo").value;
+    console.log(amigos.length);
     if (amigos.length < totalAmigos) {
       amigos.push(nombre);
-      document.getElementById("btnSortear").removeAttribute("disabled");
-    } else {
-      alert("Ya se ha completado la lista de amigos");
-      document.getElementById("btnAgregar").setAttribute("disabled", "true");
-    }
-    document.getElementById("amigo").value = "";
+      console.log(amigos);
+      console.log(totalAmigos);
+      mostrarAmigos();
 
-    mostrarAmigos();
+      document.getElementById("btnAgregar").removeAttribute("disabled");
+      document.getElementById("btnSortear").setAttribute("disabled", "true");
+    }
+
+    if (amigos.length == totalAmigos) {
+      document.getElementById("btnSortear").removeAttribute("disabled");
+      document.getElementById("btnAgregar").setAttribute("disabled", "true");
+      document.getElementById("amigo").value = "";
+    }
   }
+  document.getElementById("amigo").value = "";
   document.getElementById("amigo").focus();
 }
 
 //No se controla si la lista esta vacia porque ya se hizo el control desde el principio
+//Sino se usaria amigos.length > 0
 function mostrarAmigos() {
   let lista = document.getElementById("listaAmigos");
   lista.innerHTML = "";
@@ -61,42 +79,32 @@ function mostrarAmigos() {
 }
 
 function sortearAmigo() {
-  //let sorteoListo;
-  if (amigos.includes(undefined)) {
-    document.getElementById("btnSortear").setAttribute("disabled", "true");
-    document.getElementById("btnReiniciar").setAttribute("disabled", "true");
-    alert("La lista está incompleta!");
-    
-    //document.getElementById("btnSortear").removeAttribute("disabled");
-  } else {
-    let indice = Math.floor(Math.random() * amigos.length);
+  console.log("a sortear");
 
-    let sorteado = document.getElementById("resultado");
+  document.getElementById("btnAgregar").setAttribute("disabled", "true");
+  let indice = Math.floor(Math.random() * amigos.length);
 
-    sorteado.innerHTML = `<li><b>Amigo secreto: ${amigos[indice]}</li><br>`;
+  let sorteado = document.getElementById("resultado");
 
-    
+  sorteado.innerHTML = `<li><b>Amigo secreto: ${amigos[indice]}</li><br>`;
+  //sorteoListo = true;
 
-    sorteoListo = true;
-    //sorteoListo = false
-  }document.getElementById("btnReiniciar").removeAttribute("disabled");
-  //return sorteoListo;
+  document.getElementById("btnSortear").setAttribute("disabled", "true");
+  document.getElementById("btnReiniciar").dataset.sorteoRealizado = "true";
+  document.getElementById("btnReiniciar").removeAttribute("disabled");
 }
 
 //Se agrega funcion para reiniciar el juego
 function reiniciar() {
-  //console.log(sortearAmigo());
-  //if (sortearAmigo()) {
-    //document.getElementById("btnReiniciar").removeAttribute("disabled");
+  let reiniciar = document.getElementById("btnReiniciar");
+  console.log("reinicia");
+  if (reiniciar.dataset.sorteoRealizado) {
     document.getElementById("listaAmigos").innerHTML = "";
     document.getElementById("resultado").innerHTML = "";
-    document.getElementById("btnSortear").setAttribute("disabled", "true");
-
-    amigos.length = 0;
 
     cantidadAmigos();
-  //} else {
-    //alert("No realizo el sorteo!");
-    //document.getElementById("btnReiniciar").setAttribute("disabled", "true");
-  //}
+
+    amigos.length = 0;
+    reiniciar.setAttribute("disabled", "true");
+  }
 }
